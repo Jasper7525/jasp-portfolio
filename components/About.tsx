@@ -9,7 +9,7 @@ const About: React.FC = () => {
           <div className="flex-1 relative">
             <div className="relative z-10 rounded-2xl overflow-hidden border-2 border-slate-800 shadow-2xl">
               <img 
-                src="/src/20231202_020357.jpg" 
+                src="./src/20231202_020357.jpg" 
                 alt="Tugume Jasper" 
                 className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700"
               />
