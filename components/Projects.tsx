@@ -8,14 +8,14 @@ const Projects: React.FC = () => {
       category: 'IoT & AI',
       description: 'A comprehensive project that integrates Internet of Things (IoT) devices with Artificial Intelligence (AI) to enable smart control and monitoring of connected systems.',
       technologies: ['React.js', 'Node.js', 'Sensors', 'AI APIs'],
-      image: 'https://share.google/ldDCrWZGKiwJ7MPKd/800/600?random=10'
+      image: '/src/IMG-20251021-WA0000 (1).jpg'
     },
     {
       title: 'Web Info Maintenance',
       category: 'Web Development',
       description: 'A professional platform maintenance project focusing on UI optimization and frontend performance enhancement for a local Ugandan tech company.',
       technologies: ['HTML', 'Tailwind CSS', 'JavaScript'],
-      image: 'https://picsum.photos/800/600?random=11'
+      image: '/src/web dev.jpg'
     }
   ];
 

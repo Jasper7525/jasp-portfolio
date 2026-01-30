@@ -1,6 +1,5 @@
-
 import React, { useState, useRef, useEffect } from 'react';
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const ChatAssistant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,27 +25,25 @@ const ChatAssistant: React.FC = () => {
     setIsTyping(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
-      const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: `
-          You are the AI assistant for Tugume Jasper. 
-          Context about Jasper:
-          - Age: 24, Nationality: Ugandan.
-          - Education: Computer Science student at Kabale University.
-          - Skills: JavaScript, Python, React, Tailwind, IoT, AI integration, Node.js, Linux.
-          - Experience: Internship at Web Info Ltd (frontend focus).
-          - Key Project: IoT Smart System integrating hardware with AI.
-          - Goals: Seeking an internship/job in dynamic tech roles.
-          - Contact: tugumejasper30@gmail.com, +256 743688205.
-          
-          User question: ${userMessage}
-          
-          Provide a professional, friendly, and concise response. Always refer to Jasper in the third person. If someone asks for a resume, tell them they are currently browsing his interactive portfolio!
-        `
-      });
+      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || '');
+      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      const response = await model.generateContent(`
+        You are the AI assistant for Tugume Jasper. 
+        Context about Jasper:
+        - Age: 24, Nationality: Ugandan.
+        - Education: Computer Science student at Kabale University.
+        - Skills: JavaScript, Python, React, Tailwind, IoT, AI integration, Node.js, Linux.
+        - Experience: Internship at Web Info Ltd (frontend focus).
+        - Key Project: IoT Smart System integrating hardware with AI.
+        - Goals: Seeking an internship/job in dynamic tech roles.
+        - Contact: tugumejasper30@gmail.com, +256 743688205.
+        
+        User question: ${userMessage}
+        
+        Provide a professional, friendly, and concise response. Always refer to Jasper in the third person. If someone asks for a resume, tell them they are currently browsing his interactive portfolio!
+      `);
 
-      const text = response.text || "I'm sorry, I couldn't process that. Please try emailing Jasper directly!";
+      const text = response.response.text() || "I'm sorry, I couldn't process that. Please try emailing Jasper directly!";
       setMessages(prev => [...prev, { role: 'ai', text }]);
     } catch (error) {
       console.error("AI Error:", error);
